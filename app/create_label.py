@@ -14,9 +14,6 @@ PAGE_WIDTH=label_page_size[0]
 basedir = os.path.abspath(os.path.dirname(__file__)) # put the files in the right place no matter what!
 pdfmetrics.registerFont(TTFont('Monsterrat', basedir+'/Montserrat/Montserrat-Regular.ttf'))
 
-
-
-
 class Label():
 	def __init__(self,):
 		self.collection = ''
@@ -24,7 +21,7 @@ class Label():
 		self.order = ''
 		self.num = ''
 		self.date = ''
-		self.path = basedir+'/labels/'
+		self.path = str(basedir)+'/labels/'
 
 	def generate_label(self,collection, color, order, num, date):
 		self.collection = collection
@@ -57,6 +54,10 @@ class Label():
 		label_canvas.setFont('Monsterrat', 16)
 
 		label_canvas.drawString(PAGE_WIDTH/2.0 - 3.5*inch, \
+		                        PAGE_HEIGHT/2.0-(1.5*inch)-18, \
+		                        'Revel Woods Order# ' +self.order)
+
+		label_canvas.drawString(PAGE_WIDTH/2.0 - 3.5*inch, \
 		                        PAGE_HEIGHT/2.0-(1.75*inch)-18, \
 		                        self.date)
 
@@ -67,4 +68,4 @@ class Label():
 
 
 		label_canvas.save()
-		return(self.path)
+		return('labels/'+self.collection+'_'+self.color+'.pdf')
