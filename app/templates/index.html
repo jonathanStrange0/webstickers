@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>{{ title }} - WebStickers</title>
+    </head>
+    <body>
+        <h1>Create Your Label Here</h1>
+
+	{% block content %}
+		<form action="" method="post" novalidate>
+			{{ form.hidden_tag() }}
+			<p>
+				{{ form.collection_name.label }} <br>
+				{{ form.collection_name(size=32) }}
+			</p>
+    		<p>
+                {{ form.color_name.label }} <br>
+                {{ form.color_name(size=32) }}
+            </p>
+    		<p>
+                {{ form.order_num.label }} <br>
+                {{ form.order_num(size=32) }}
+            </p>
+    		<p>
+                {{ form.run_num.label }} <br>
+                {{ form.run_num(size=32) }}
+            </p>
+    		<p>
+                {{ form.run_date.label }} <br>
+                {{ form.run_date(size=32) }}
+            </p>
+    		<p>
+                {{ form.submit() }} <br>
+                <a href="/labels/hi.pdf" download>Download Label</a>
+            </p>
+		</form>
+	{% endblock %}
+    <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+    </body>	
+</html>
