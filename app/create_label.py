@@ -29,12 +29,12 @@ class Label():
 		self.order = order # must configure
 		self.num = num
 		self.date = date
-		self.path = self.path + self.collection+'_'+self.color+'.pdf'
+		self.path = self.path + self.order+'.pdf'
 		label_canvas = canvas.Canvas(self.path,pagesize=label_page_size)
 
 		# Set Label font and sizing & translate
 		label_canvas.setLineWidth(0.3)
-		label_canvas.setFont('Monsterrat', 36)
+		label_canvas.setFont('Monsterrat', 32)
 		label_canvas.translate(PAGE_WIDTH/2.0,PAGE_HEIGHT/2.0)
 
 		# Draw RW Logo
@@ -59,7 +59,7 @@ class Label():
 
 		label_canvas.drawString(PAGE_WIDTH/2.0 - 3.5*inch, \
 		                        PAGE_HEIGHT/2.0-(1.75*inch)-18, \
-		                        self.date)
+		                        'Prod Date: ' +self.date)
 
 		label_canvas.drawString(PAGE_WIDTH/2.0 - 3.5*inch, \
 		                        PAGE_HEIGHT/2.0-(2*inch)-18, \
@@ -68,4 +68,4 @@ class Label():
 
 
 		label_canvas.save()
-		return('labels/'+self.collection+'_'+self.color+'.pdf')
+		return('labels/'+self.order+'.pdf')
