@@ -7,5 +7,5 @@ MarkupSafe==1.1.1
 Pillow==6.0.0
 python-dotenv==0.10.1
 reportlab==3.5.21
-Werkzeug==0.15.2
+Werkzeug==0.15.3
 WTForms==2.2.1
