@@ -1,0 +1,1 @@
+docker run --name webstickers --restart=always --mount source=wsvol,target=/app/labels -d -p 8001:5000 --rm webstickers:latest

@@ -22,3 +22,10 @@ def index():
     		form.run_date.data))
     	# return redirect('labels/hi.pdf')
     return render_template('index.html', title='Print Stickers', form=form)
+
+
+
+
+
+
+
