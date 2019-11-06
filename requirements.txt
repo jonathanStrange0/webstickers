@@ -70,12 +70,14 @@ Send2Trash==1.5.0
 Sijax==0.3.2
 six==1.11.0
 SQLAlchemy==1.2.10
+style==1.1.0
 tabulate==0.8.2
 terminado==0.8.2
 testpath==0.4.2
 tornado==6.0.3
 traitlets==4.3.3
 unleashed-py==1.0.8
+update==0.0.1
 urllib3==1.24.2
 visitor==0.1.3
 wcwidth==0.1.7
