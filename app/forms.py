@@ -15,12 +15,9 @@ class StickerForm(FlaskForm):
 class SampleLabelForm(FlaskForm):
     collection = QuerySelectField(query_factory=\
         lambda: Collection.query.order_by('collection_name'), \
-        allow_blank=True, get_label='collection_name')
+            allow_blank=True, get_label='collection_name',
+                validators=[DataRequired()])
 
-    # collection_items = QuerySelectField(query_factory=\
-    #     lambda: CollectionItem.query.order_by('item_name'), \
-    #     allow_blank=True, get_label='item_name')
-
-    collection_items = SelectField(label='Flooring SKU', choices=[])
-    print_sample_label = SubmitField(label='Print Sample Label')
-    print_crossover_label = SubmitField(label='Print Crossover Label')
+    collection_items = SelectField(label='Flooring SKU', coerce=int, choices=[])
+    print_sample_label = SubmitField('Print Sample Label')
+    print_crossover_label = SubmitField('Print Crossover Label')

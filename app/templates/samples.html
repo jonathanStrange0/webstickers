@@ -6,14 +6,14 @@
         <h1>Create Your Sample Label Here</h1>
 
 	{% block content %}
-		<form action="" method="post" novalidate>
+		<form action="" method="post">
 			{{ form.hidden_tag() }}
       {{ form.csrf_token }}
 			<div>
-			<p>	{{ form.collection(width=96) }} <br> </p>
+			<p>	 {{ form.collection(width=96) }} <br> </p>
       <p>  {{ form.collection_items(width=96) }} <br></p>
-      <p>  {{ form.print_sample_label }} <br></p>
-      <p>  {{ form.print_crossover_label }} <br></p>
+      <p>  {{ form.print_sample_label() }} <br></p>
+      <p>  {{ form.print_crossover_label() }} <br></p>
 			</div>
 		</form>
 

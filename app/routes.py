@@ -1,7 +1,7 @@
-from flask import render_template, flash, redirect, jsonify
+from flask import render_template, flash, redirect, jsonify, request
 from app import app
 from app.forms import StickerForm, SampleLabelForm
-from app.create_label import Label
+from app.create_label import ShippingLabel, SampleLabel
 from app.models import Collection, CollectionItem
 
 @app.route('/', methods=['GET', 'POST'])
@@ -10,7 +10,7 @@ def index():
     form = StickerForm()
     if form.validate_on_submit():
     	flash('Label Being Created')
-    	label = Label()
+    	label = ShippingLabel()
     	print(form.collection_name.data, \
     		form.color_name.data, \
     		form.order_num.data, \
@@ -27,23 +27,26 @@ def index():
 @app.route('/sample_labels', methods=['GET', 'POST'])
 def sample_labels():
     form = SampleLabelForm()
-    if request.method == 'POST' and form.validate_on_submit():
-        # TODO: Pass in the sample info and generate appropriate label
-        if print_sample_label.data:
-            pass
 
-        elif print_crossover_label.data:
-            pass
 
-    # if form.validate_on_submit():
-    	# flash('Label Being Created')
-    	# label = Label()
-    	# return redirect(label.generate_label(form.collection_name.data, \
-    	# 	form.color_name.data, \
-    	# 	form.order_num.data, \
-    	# 	form.run_num.data, \
-    	# 	form.run_date.data))
-    	# return redirect('labels/hi.pdf')
+    if request.method == 'POST':# and form.validate_on_submit():
+        print(form.errors)
+        if form.is_submitted():
+            print("submitted")
+        if form.validate():
+            print("valid")
+        print(form.errors)
+        # return('collection {}, SKU {}'.format(form.collection.data.collection_name,
+        #                 CollectionItem.query.filter_by(id=form.collection_items.data).first().item_name))
+        # # TODO: Pass in the sample info and generate appropriate label
+        # print("Validated? ", form.validate_on_submit())
+        if form.print_sample_label.data:
+            print('pressed the print sample label button')
+            sample_label = SampleLabel(form.collection_items.data)
+            return redirect(sample_label.generate_sample_label())
+
+        # elif form.print_crossover_label.data:
+        #     pass
     return render_template('samples.html', title='Print Sample Labels', form=form)
 
 @app.route('/collection_items/<collection_id>')
