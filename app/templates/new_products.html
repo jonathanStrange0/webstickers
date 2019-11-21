@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+	{% block content %}
+  <h1>Create Your Sample Label Here</h1>
+		<form action="" method="post">
+			{{ form.hidden_tag() }}
+      {{ form.csrf_token }}
+			<div>
+        <p>
+          {{ form.collection_name.label }}	 <br>
+          {{ form.collection_name }}
+        </p>
+        <p>
+          {{ form.color_name.label }}<br>
+          {{ form.color_name }} <br>
+        </p>
+        <p>
+          {{ form.species.label }}<br>
+          {{ form.species }} <br>
+        </p>
+        <p>
+          {{ form.width.label }}<br>
+          {{ form.width }} <br>
+        </p>
+        <p>
+          {{ form.durability.label }}<br>
+          {{ form.durability }} <br>
+        </p>
+        <p>
+          {{ form.length.label }}<br>
+          {{ form.length }} <br>
+        </p>
+        <p>
+          {{ form.iw_name.label }}<br>
+          {{ form.iw_name }} <br>
+        </p>
+        <p> {{ form.save }}
+			</div>
+		</form>
+
+
+
+	{% endblock %}

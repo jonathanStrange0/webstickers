@@ -21,3 +21,13 @@ class SampleLabelForm(FlaskForm):
     collection_items = SelectField(label='Flooring SKU', coerce=int, choices=[])
     print_sample_label = SubmitField('Print Sample Label')
     print_crossover_label = SubmitField('Print Crossover Label')
+
+class NewProductForm(FlaskForm):
+    collection_name = StringField('Collection Name', validators=[DataRequired()])
+    color_name = StringField('Color Name', validators=[DataRequired()])
+    species = StringField('Species', validators=[DataRequired()])
+    width = StringField('Width', validators=[DataRequired()])
+    durability = StringField('Durability', validators=[DataRequired()])
+    length = StringField('Length Structure', validators=[DataRequired()])
+    iw_name = StringField('IW Crossover Name', validators=[DataRequired()])
+    save = SubmitField('Save New Product')

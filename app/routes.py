@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, jsonify, request
 from app import app
-from app.forms import StickerForm, SampleLabelForm
-from app.create_label import ShippingLabel, SampleLabel
+from app.forms import StickerForm, SampleLabelForm, NewProductForm
+from app.create_label import ShippingLabel, SampleLabel, CrossoverLabel
 from app.models import Collection, CollectionItem
 
 @app.route('/', methods=['GET', 'POST'])
@@ -45,8 +45,10 @@ def sample_labels():
             sample_label = SampleLabel(form.collection_items.data)
             return redirect(sample_label.generate_sample_label())
 
-        # elif form.print_crossover_label.data:
-        #     pass
+        elif form.print_crossover_label.data:
+            print('pressed the print crossover label button')
+            crossover_label = CrossoverLabel(form.collection_items.data)
+            return redirect(crossover_label.generate_crossover_label())
     return render_template('samples.html', title='Print Sample Labels', form=form)
 
 @app.route('/collection_items/<collection_id>')
@@ -59,12 +61,25 @@ def collection_items(collection_id):
         collection_obj = {}
         collection_obj['id'] = item.id
         collection_obj['name'] = item.item_name
-        # collection_obj['species'] = species
-        # collection_obj['width'] = width
-        # collection_obj['durability'] = durability
-        # collection_obj['length'] = length
-        # collection_obj['iw_name'] = iw_name
-        # collection_obj['collection_id'] = collection_id
+
         col_item_array.append(collection_obj)
 
     return jsonify({'collection_items': col_item_array})
+
+@app.route('/new_product')
+def new_product():
+    form = NewProductForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        collection_name = form.collection_name
+        collection = None
+        if len(Collection.query.filter_by(collection_name=collection_name)) ==0:
+            collection = Collection(collection_name=collection_name)
+            
+            db.session.commit()
+        else:
+            collection = Collection.query.filty_by(collection_name=collection_name)
+
+
+
+
+    return render_template('new_products.html', title='Make New Products', form=form)

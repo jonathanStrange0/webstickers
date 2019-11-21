@@ -88,48 +88,100 @@ class SampleLabel():
 
 	def generate_sample_label(self):
 
-		label_canvas = canvas.Canvas(self.path,pagesize=self.label_page_size)
+		if os.path.isfile(self.path):
+			print('File exists')
+			return('/labels/'+self.item.item_name+'.pdf')
+		else:
 
-		# Set Label font and sizing & translate
-		label_canvas.setLineWidth(0.3)
-		label_canvas.setFont('Monsterrat-Bold', 24)
-		label_canvas.translate(self.PAGE_WIDTH/2.0,self.PAGE_HEIGHT/2.0)
+			label_canvas = canvas.Canvas(self.path,pagesize=self.label_page_size)
 
-		# Draw RW Logo
-		im = Image(basedir+'/final_logo_TM.jpg', width=2*inch, height=2.0/3.0*inch)
-		im.drawOn(label_canvas,-3.75*inch,0.5*inch)
+			# Set Label font and sizing & translate
+			label_canvas.setLineWidth(0.3)
+			label_canvas.setFont('Monsterrat-Bold', 24)
+			label_canvas.translate(self.PAGE_WIDTH/2.0,self.PAGE_HEIGHT/2.0)
 
-		if self.item.collection.collection_name == 'Eddie Bauer Adventure':
-		    # Draw EB Logo
-		    im = Image('Eddie Bauer HOME.jpg', width=3*inch, height=3.0/5.028*inch)
-		    im.drawOn(label_canvas,0.75*inch,0.5*inch)
+			# Draw RW Logo
+			im = Image(basedir+'/final_logo_TM.jpg', width=2*inch, height=2.0/3.0*inch)
+			im.drawOn(label_canvas,-3.75*inch,0.5*inch)
 
-		# Draw the Collection Name and SKU Name
-		label_canvas.drawString(-self.PAGE_WIDTH/2.0 + 0.25*inch,
-		                        self.PAGE_HEIGHT/2.0-(1.5*inch),
-		                        self.item.collection.collection_name+': '+self.item.item_name)
+			if self.item.collection.collection_name == 'Eddie Bauer Adventure':
+			    # Draw EB Logo
+			    im = Image('Eddie Bauer HOME.jpg', width=3*inch, height=3.0/5.028*inch)
+			    im.drawOn(label_canvas,0.75*inch,0.5*inch)
 
-
-		# label_canvas.translate(-PAGE_WIDTH/2.0,-PAGE_HEIGHT/2.0)
-
-		label_canvas.setFont('Monsterrat-Bold', 18)
+			# Draw the Collection Name and SKU Name
+			label_canvas.drawString(-self.PAGE_WIDTH/2.0 + 0.25*inch,
+			                        self.PAGE_HEIGHT/2.0-(1.5*inch),
+			                        self.item.collection.collection_name+': '+self.item.item_name)
 
 
-		label_canvas.drawString(-self.PAGE_WIDTH/2.0 + 0.25*inch,
-		                        self.PAGE_HEIGHT/2.0-(2*inch),
-		                        'Species: '+self.item.species)
+			# label_canvas.translate(-PAGE_WIDTH/2.0,-PAGE_HEIGHT/2.0)
 
-		label_canvas.drawString(-self.PAGE_WIDTH/2.0 + 0.25*inch,
-		                        self.PAGE_HEIGHT/2.0-(2.5*inch),
-		                        'Width: '+self.item.width)
+			label_canvas.setFont('Monsterrat-Bold', 18)
 
-		label_canvas.drawString(-self.PAGE_WIDTH/4 + 2.5*inch,
-		                        self.PAGE_HEIGHT/2.0-(2*inch),
-		                        'Durability: '+self.item.durability)
 
-		label_canvas.drawString(-self.PAGE_WIDTH/4 + 2.5*inch,
-		                        self.PAGE_HEIGHT/2.0-(2.5*inch),
-		                        'Length: '+self.item.length)
+			label_canvas.drawString(-self.PAGE_WIDTH/2.0 + 0.25*inch,
+			                        self.PAGE_HEIGHT/2.0-(2*inch),
+			                        'Species: '+self.item.species)
 
-		label_canvas.save()
-		return('/labels/'+self.item.item_name+'.pdf')
+			label_canvas.drawString(-self.PAGE_WIDTH/2.0 + 0.25*inch,
+			                        self.PAGE_HEIGHT/2.0-(2.5*inch),
+			                        'Width: '+self.item.width)
+
+			label_canvas.drawString(-self.PAGE_WIDTH/4 + 2.5*inch,
+			                        self.PAGE_HEIGHT/2.0-(2*inch),
+			                        'Durability: '+self.item.durability)
+
+			label_canvas.drawString(-self.PAGE_WIDTH/4 + 2.5*inch,
+			                        self.PAGE_HEIGHT/2.0-(2.5*inch),
+			                        'Length: '+self.item.length)
+
+			label_canvas.save()
+			return('/labels/'+self.item.item_name+'.pdf')
+
+class CrossoverLabel():
+
+	def __init__(self,item_id):
+		self.label_page_size = (8*inch, 3*inch)
+		self.PAGE_HEIGHT=self.label_page_size[1]
+		self.PAGE_WIDTH=self.label_page_size[0]
+		self.item = CollectionItem.query.filter_by(id=item_id).first()
+		print(self.item)
+		self.path = str(basedir)+'/labels/'
+		self.path = self.path + self.item.item_name+'-Crossover.pdf'
+
+	def generate_crossover_label(self):
+
+		if os.path.isfile(self.path):
+			print('File exists')
+			return('/labels/'+self.item.item_name+'-Crossover.pdf')
+		else:
+
+			label_canvas = canvas.Canvas(self.path,pagesize=self.label_page_size)
+
+			# Set Label font and sizing & translate
+			label_canvas.setLineWidth(0.3)
+			label_canvas.setFont('Monsterrat-Bold', 24)
+			label_canvas.translate(self.PAGE_WIDTH/2.0,self.PAGE_HEIGHT/2.0)
+
+			# Draw the Collection Name and SKU Name
+			label_canvas.drawString(-self.PAGE_WIDTH/2.0 + 0.25*inch,
+			                        self.PAGE_HEIGHT/2.0-(1.5*inch),
+			                        self.item.collection.collection_name+': '+self.item.item_name)
+
+
+			# label_canvas.translate(-PAGE_WIDTH/2.0,-PAGE_HEIGHT/2.0)
+
+			label_canvas.setFont('Monsterrat-Bold', 18)
+
+
+			label_canvas.drawString(-self.PAGE_WIDTH/2.0 + 0.25*inch,
+			                        self.PAGE_HEIGHT/2.0-(2*inch),
+			                        'Species: '+self.item.species)
+
+			label_canvas.drawString(-self.PAGE_WIDTH/2.0 + 0.25*inch,
+			                        self.PAGE_HEIGHT/2.0-(2.5*inch),
+			                        'IW Name: '+self.item.iw_name)
+
+			label_canvas.save()
+			return('/labels/'+self.item.item_name+'-Crossover.pdf')

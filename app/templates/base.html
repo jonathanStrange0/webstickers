@@ -1,0 +1,18 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - WebStickers</title>
+      {% else %}
+      <title>Welcome to Revel Woods WebStickers</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>
+          <a href="/index">Home</a>
+          <a href="/sample_labels">Print Sample Labels</a>
+          <a href="/new_product">Create New Products</a>
+        </div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
