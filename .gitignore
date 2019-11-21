@@ -1,2 +1,4 @@
 venv
 venv/*
+.env
+app/rw_product_data.csv

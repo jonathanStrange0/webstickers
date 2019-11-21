@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>{{ title }} - WebStickers</title>
+    </head>
+    <body>
+        <h1>Create Your Sample Label Here</h1>
+
+	{% block content %}
+		<form action="" method="post" novalidate>
+			{{ form.hidden_tag() }}
+      {{ form.csrf_token }}
+			<div>
+			<p>	{{ form.collection(width=96) }} <br> </p>
+      <p>  {{ form.collection_items(width=96) }} <br></p>
+      <p>  {{ form.print_sample_label }} <br></p>
+      <p>  {{ form.print_crossover_label }} <br></p>
+			</div>
+		</form>
+
+    <script>
+      let col_select = document.getElementById('collection');
+      let col_item_select = document.getElementById('collection_items');
+
+      col_select.onchange = function(){
+        collection_id = col_select.value;
+        fetch('/collection_items/' + collection_id).then(function(response){
+          response.json().then(function(data){
+            let optionHTML = '';
+            for (let item of data.collection_items) {
+              optionHTML += '<option value="' + item.id + '">' + item.name + '</option>';
+            }
+            col_item_select.innerHTML = optionHTML;
+          });
+        });
+      }
+    </script>
+	{% endblock %}
+    <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+    </body>
+</html>
