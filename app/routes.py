@@ -3,6 +3,7 @@ from app import app
 from app.forms import StickerForm, SampleLabelForm, NewProductForm
 from app.create_label import ShippingLabel, SampleLabel, CrossoverLabel
 from app.models import Collection, CollectionItem
+from app import db
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -49,7 +50,13 @@ def sample_labels():
             print('pressed the print crossover label button')
             crossover_label = CrossoverLabel(form.collection_items.data)
             return redirect(crossover_label.generate_crossover_label())
+        elif form.delete_button.data:
+            delete_item = CollectionItem.query.filter_by(id=form.collection_items.data).first()
+            db.session.delete(delete_item)
+            db.session.commit()
+            return render_template('samples.html', title='Print Sample Labels', form=form)
     return render_template('samples.html', title='Print Sample Labels', form=form)
+
 
 @app.route('/collection_items/<collection_id>')
 def collection_items(collection_id):
@@ -66,18 +73,38 @@ def collection_items(collection_id):
 
     return jsonify({'collection_items': col_item_array})
 
-@app.route('/new_product')
+@app.route('/new_product', methods=['GET', 'POST'])
 def new_product():
     form = NewProductForm()
     if request.method == 'POST' and form.validate_on_submit():
-        collection_name = form.collection_name
+        collection_name = form.collection_name.data
         collection = None
-        if len(Collection.query.filter_by(collection_name=collection_name)) ==0:
+        color_name = form.color_name.data
+        species = None
+        width = None
+        durability = None
+        length = None
+        iw_name = None
+        if len(Collection.query.filter_by(collection_name=collection_name).all()) ==0:
             collection = Collection(collection_name=collection_name)
-            
+            db.session.add(collection)
             db.session.commit()
         else:
-            collection = Collection.query.filty_by(collection_name=collection_name)
+            collection = Collection.query.filter_by(collection_name=collection_name).first()
+        if len(CollectionItem.query.filter_by(item_name=color_name).all()) ==0:
+            color_name = CollectionItem(item_name=color_name)
+            db.session.add(color_name)
+            db.session.commit()
+        else:
+            color_name = CollectionItem.query.filter_by(item_name=color_name).first()
+        color_name.collection_id = collection.id
+        color_name.species = form.species.data
+        color_name.width = form.width.data
+        color_name.durability = form.durability.data
+        color_name.length = form.length.data
+        color_name.iw_name = form.iw_name.data
+
+        db.session.commit()
 
 
 
