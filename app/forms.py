@@ -21,7 +21,8 @@ class SampleLabelForm(FlaskForm):
     collection_items = SelectField(label='Flooring SKU', coerce=int, choices=[])
     print_sample_label = SubmitField('Print Sample Label')
     print_crossover_label = SubmitField('Print Crossover Label')
-    delete_button = SubmitField('Delete this product')
+    # delete_product_button = SubmitField('Delete this product')
+    delete_collection_button = SubmitField('Delete this whole colletion')
 
 class NewProductForm(FlaskForm):
     collection_name = StringField('Collection Name', validators=[DataRequired()])
