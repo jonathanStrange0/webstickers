@@ -22,7 +22,7 @@ class SampleLabelForm(FlaskForm):
     print_sample_label = SubmitField('Print Sample Label')
     print_crossover_label = SubmitField('Print Crossover Label')
     # delete_product_button = SubmitField('Delete this product')
-    delete_collection_button = SubmitField('Delete this whole colletion')
+    # delete_collection_button = SubmitField('Delete this whole colletion')
 
 class NewProductForm(FlaskForm):
     collection_name = StringField('Collection Name', validators=[DataRequired()])

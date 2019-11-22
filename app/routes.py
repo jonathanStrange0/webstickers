@@ -125,3 +125,10 @@ def delete_product(product_id):
     db.session.delete(delete_item)
     db.session.commit()
     return(redirect(url_for('sample_labels'))) #render_template('samples.html', title='Print Sample Labels', form=form)
+
+@app.route('/delete_collection/<collection_id>')
+def delete_collection(collection_id):
+    delete_item = Collection.query.filter_by(id=collection_id).first()
+    db.session.delete(delete_item)
+    db.session.commit()
+    return(redirect(url_for('sample_labels'))) #render_template('samples.html', title='Print Sample Labels', form=form)

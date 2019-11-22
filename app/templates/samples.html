@@ -6,15 +6,14 @@
 			{{ form.hidden_tag() }}
       {{ form.csrf_token }}
 			<div>
-			<p>	 {{ form.collection(width=96) }} <br> </p>
-      <p>  {{ form.collection_items(width=96) }} <br></p>
-      <p>  {{ form.print_sample_label() }} <br></p>
-      <p>  {{ form.print_crossover_label() }} <br></p>
-
-			<p>  {{ form.delete_collection_button() }} <br></p>
+				<p>	 {{ form.collection(width=96) }} <br> </p>
+	      <p>  {{ form.collection_items(width=96) }} <br></p>
+	      <p>  {{ form.print_sample_label() }} <br></p>
+	      <p>  {{ form.print_crossover_label() }} <br></p>
 			</div>
 		</form>
 		<p>  <button id="delete_product_button">Delete This Product </button> <br></p>
+		<p>  <button id="delete_collection_button">Delete This Whole Collection </button> <br></p>
 
     <script>
       let col_select = document.getElementById('collection');
@@ -36,13 +35,25 @@
 
 		<script>
 			let delete_prod = document.getElementById('delete_product_button');
-			// let col_item_select = document.getElementById('collection_items');
 			delete_prod.onclick = function(){
 				if (confirm('Do you really want to do this thing?')){
 					// console.log("test");
 					fetch('/delete_product/' + col_item_select.value).then(function(){
 						location.replace('/sample_labels' );
-						// alert('Your Item Has Been Deleted.')/
+						// alert('Your Item Has Been Deleted.')
+					});
+
+				}
+			};
+		</script>
+
+		<script>
+			let delete_col = document.getElementById('delete_collection_button');
+			delete_col.onclick = function(){
+				if (confirm('Do you really want to do this thing?')){
+					fetch('/delete_collection/' + col_select.value).then(function(){
+						location.replace('/sample_labels' );
+						// alert('Your Collection Has Been Deleted.')
 					});
 
 				}
