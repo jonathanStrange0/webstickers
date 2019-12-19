@@ -1,7 +1,7 @@
 {% extends "base.html"%}
 
 	{% block content %}
-  <h1>Create Your Sample Label Here</h1>
+  <h1>Create Your Product Label Here</h1>
 		<form action="" method="post">
 			{{ form.hidden_tag() }}
       {{ form.csrf_token }}
@@ -33,24 +33,24 @@
       }
     </script>
 
-		<script>
-			let delete_prod = document.getElementById('delete_product_button');
-			delete_prod.onclick = function(){
-				if (confirm('Do you really want to do this thing?')){
-					// console.log("test");
-					fetch('/delete_product/' + col_item_select.value).then(function(){
-						location.replace('/sample_labels' );
-						// alert('Your Item Has Been Deleted.')
-					});
+	<script>
+		let delete_prod = document.getElementById('delete_product_button');
+		delete_prod.onclick = function(){
+			if (confirm('Do you really want to delete this product?')){
+				// console.log("test");
+				fetch('/delete_product/' + col_item_select.value).then(function(){
+					location.replace('/sample_labels' );
+					// alert('Your Item Has Been Deleted.')
+				});
 
-				}
-			};
-		</script>
+			}
+		};
+	</script>
 
 		<script>
 			let delete_col = document.getElementById('delete_collection_button');
 			delete_col.onclick = function(){
-				if (confirm('Do you really want to do this thing?')){
+				if (confirm('Do you really want to delete this collection?')){
 					fetch('/delete_collection/' + col_select.value).then(function(){
 						location.replace('/sample_labels' );
 						// alert('Your Collection Has Been Deleted.')
