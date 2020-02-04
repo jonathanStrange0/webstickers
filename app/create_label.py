@@ -34,7 +34,7 @@ class ShippingLabel():
 		self.order = order # must configure
 		self.num = num
 		self.date = date
-		self.path = self.path + self.order+'.pdf'
+		self.path = self.path + self.order+ '_' + self.num +'.pdf'
 		label_canvas = canvas.Canvas(self.path,pagesize=self.label_page_size)
 
 		# Set Label font and sizing & translate
@@ -73,7 +73,7 @@ class ShippingLabel():
 
 
 		label_canvas.save()
-		return('labels/'+self.order+'.pdf')
+		return('labels/'+self.order+ '_' + self.num + '.pdf')
 
 class SampleLabel():
 
