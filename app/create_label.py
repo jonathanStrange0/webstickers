@@ -8,6 +8,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import os
 from app.models import Collection, CollectionItem
+form datetime import datetime
 
 basedir = os.path.abspath(os.path.dirname(__file__)) # put the files in the right place no matter what!
 pdfmetrics.registerFont(TTFont('Monsterrat', basedir+'/Montserrat/Montserrat-Regular.ttf'))
@@ -83,8 +84,9 @@ class SampleLabel():
 		self.PAGE_WIDTH=self.label_page_size[0]
 		self.item = CollectionItem.query.filter_by(id=item_id).first()
 		print(self.item)
+		`self.date = str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second)`
 		self.path = str(basedir)+'/labels/'
-		self.path = self.path + self.item.item_name+'.pdf'
+		self.path = self.path + self.item.item_name + self.date +'.pdf'
 
 	def generate_sample_label(self):
 
@@ -147,8 +149,9 @@ class CrossoverLabel():
 		self.PAGE_WIDTH=self.label_page_size[0]
 		self.item = CollectionItem.query.filter_by(id=item_id).first()
 		print(self.item)
+		self.date = str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second)
 		self.path = str(basedir)+'/labels/'
-		self.path = self.path + self.item.item_name+'-Crossover.pdf'
+		self.path = self.path + self.item.item_name+ self.date +'-Crossover.pdf'
 
 	def generate_crossover_label(self):
 
