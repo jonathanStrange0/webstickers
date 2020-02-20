@@ -8,7 +8,7 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import os
 from app.models import Collection, CollectionItem
-form datetime import datetime
+from datetime import datetime
 
 basedir = os.path.abspath(os.path.dirname(__file__)) # put the files in the right place no matter what!
 pdfmetrics.registerFont(TTFont('Monsterrat', basedir+'/Montserrat/Montserrat-Regular.ttf'))
