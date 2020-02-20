@@ -86,16 +86,16 @@ class SampleLabel():
 		print(self.item)
 		self.date = str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second)
 		self.path = str(basedir)+'/labels/'
-		self.path = self.path + self.item.item_name + self.date +'.pdf'
+		self.filename = self.item.item_name + self.date +'.pdf'
 
 	def generate_sample_label(self):
 
-		if os.path.isfile(self.path):
+		if os.path.isfile(self.path + self.filename):
 			print('File exists')
-			return('/labels/'+self.item.item_name+'.pdf')
+			return('/labels/'+self.filename)
 		else:
 
-			label_canvas = canvas.Canvas(self.path,pagesize=self.label_page_size)
+			label_canvas = canvas.Canvas(self.path+self.filename, pagesize=self.label_page_size)
 
 			# Set Label font and sizing & translate
 			label_canvas.setLineWidth(0.3)
@@ -106,9 +106,9 @@ class SampleLabel():
 			im = Image(basedir+'/final_logo_TM.jpg', width=2*inch, height=2.0/3.0*inch)
 			im.drawOn(label_canvas,-3.75*inch,0.5*inch)
 
-			if self.item.collection.collection_name == 'Eddie Bauer Adventure':
+			if 'Eddie Bauer Adventure' in self.item.collection.collection_name:
 			    # Draw EB Logo
-			    im = Image('Eddie Bauer HOME.jpg', width=3*inch, height=3.0/5.028*inch)
+			    im = Image(basedir+'/Eddie Bauer HOME.jpg', width=3*inch, height=3.0/5.028*inch)
 			    im.drawOn(label_canvas,0.75*inch,0.5*inch)
 
 			# Draw the Collection Name and SKU Name
@@ -139,7 +139,7 @@ class SampleLabel():
 			                        'Length: '+self.item.length)
 
 			label_canvas.save()
-			return('/labels/'+self.item.item_name+'.pdf')
+			return('/labels/'+self.filename)
 
 class CrossoverLabel():
 
@@ -151,16 +151,16 @@ class CrossoverLabel():
 		print(self.item)
 		self.date = str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second)
 		self.path = str(basedir)+'/labels/'
-		self.path = self.path + self.item.item_name+ self.date +'-Crossover.pdf'
+		self.filename =  self.item.item_name+ self.date +'-Crossover.pdf'
 
 	def generate_crossover_label(self):
 
-		if os.path.isfile(self.path):
+		if os.path.isfile(self.path + self.filename):
 			print('File exists')
-			return('/labels/'+self.item.item_name+'-Crossover.pdf')
+			return('/labels/'+self.filename)
 		else:
 
-			label_canvas = canvas.Canvas(self.path,pagesize=self.label_page_size)
+			label_canvas = canvas.Canvas(self.path+self.filename, pagesize=self.label_page_size)
 
 			# Set Label font and sizing & translate
 			label_canvas.setLineWidth(0.3)
@@ -187,4 +187,4 @@ class CrossoverLabel():
 			                        'IW Name: '+self.item.iw_name)
 
 			label_canvas.save()
-			return('/labels/'+self.item.item_name+'-Crossover.pdf')
+			return('/labels/'+self.filename)
