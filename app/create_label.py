@@ -84,7 +84,7 @@ class SampleLabel():
 		self.PAGE_WIDTH=self.label_page_size[0]
 		self.item = CollectionItem.query.filter_by(id=item_id).first()
 		print(self.item)
-		self.date = str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second)`
+		self.date = str(datetime.now().year)+str(datetime.now().month)+str(datetime.now().day)+str(datetime.now().hour)+str(datetime.now().minute)+str(datetime.now().second)
 		self.path = str(basedir)+'/labels/'
 		self.path = self.path + self.item.item_name + self.date +'.pdf'
 
