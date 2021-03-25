@@ -430,7 +430,7 @@ python-xlib==0.23
 pytz==2019.3
 PyWavelets==1.0.3
 pyxhook==1.0.0
-PyYAML==5.1
+PyYAML==5.4
 pyzmq==18.0.1
 QtAwesome==0.5.7
 qtconsole==4.4.3
