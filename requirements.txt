@@ -408,7 +408,7 @@ pyobjc-framework-WebKit==5.1.2
 pyodbc==4.0.26
 pyOpenSSL==19.0.0
 pyparsing==2.4.0
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 PyQt5==5.12.1
 PyQt5-sip==4.19.15
 PyQtWebEngine==5.12.1
