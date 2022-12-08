@@ -127,7 +127,7 @@ Bottleneck==1.2.1
 bs4==0.0.1
 bz2file==0.98
 camelot-py==0.7.2
-certifi==2019.9.11
+certifi==2022.12.7
 cffi==1.12.3
 chardet==3.0.4
 Click==7.0
